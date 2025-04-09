@@ -35,7 +35,7 @@ function Product({ id, title, price, description, category, image }) {
   };
 
   return (
-    <div className='relative flex item-center flex-col m-5 bg-white z-30 p-10 rounded-md'>
+    <div className='relative flex items-center flex-col m-5 bg-white z-30 p-10 rounded-md space-y-2'>
       <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
       <Image
