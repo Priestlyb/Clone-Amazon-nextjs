@@ -1,18 +1,21 @@
-import React from "react";
-import Header from "../components/Header";
-import Banner from "../components/Banner";
+// app/page.js
+import ClientHome from "./ClientHome";
 
-function Home() {
-  return (
-    <div className="bg-gray-100">
-      {/* Header */}
-      <Header />
+export default async function Home() {
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-      <div className="max-w-screen-2xl mx-auto">
-        <Banner />
+    const products = await res.json();
+
+    return <ClientHome products={products} />;
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+
+    return (
+      <div className="bg-red-100 text-red-800 p-4">
+        <p>Error loading products. Please try again later.</p>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default Home;

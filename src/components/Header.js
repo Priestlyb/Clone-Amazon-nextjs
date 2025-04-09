@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client";
 import Image from "next/image";
 import React from "react";
 import {
@@ -6,21 +7,31 @@ import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { selectItems } from "@/slices/basketSlice";
 
 function Header() {
+  const { data: session } = useSession();
+  console.log("Session data:", session);
+  const router = useRouter();
+  const items = useSelector(selectItems);
+
   return (
     <div>
       {/* Top nav */}
-      <div className="flex item-center bg-[#131921] px-3 p-1 flex-grow py-2">
+      <div className="flex items-center bg-[#131921] px-3 p-1 flex-grow py-2">
         <div className="mr-3 flex item-center flex-grow sm:flex-grow-0">
           <Image
+            onClick={() => router.push("/")}
             alt="Logo"
             src="https://links.papareact.com/f90"
             width={100}
             height={40}
-            objectFit="contain"
-            className="cursor-pointer"
+            className="cursor-pointer object-contain"
           />
+          j{" "}
         </div>
 
         {/* Search bar **/}
@@ -33,9 +44,14 @@ function Header() {
         </div>
 
         {/* Right nav */}
-        <div className="text-white flex item-center text-xs space-x-6 mx-6 whitespace-nowrap">
-          <div className="link">
-            <p>Hello Priestly Bassey</p>
+        <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
+          <div
+            onClick={signIn}
+            className="cursor-pointer link"
+          >
+            <p className="hover:underline">
+              {session ? `Hello, ${session.user.name}` : "Sign In"}
+            </p>
             <p className="font-extrabold md:text-sm">Account & lists</p>
           </div>
 
@@ -44,30 +60,30 @@ function Header() {
             <p className="font-extrabold md:text-sm">& Orders</p>
           </div>
 
-          <div className="relative link flex items-center ">
+          <div
+            className="relative link flex items-center "
+            onClick={() => router.push("/checkout")}
+          >
             <span className="absolute top-0 right-0 md: right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
-              0
+              {items.length}
             </span>
             <ShoppingCartIcon className="h-10 " />
-            <p className="hidden md:inline font-extrabold md:text-sm  ">Cart</p>
+            <p className="hidden md:inline font-extrabold md:text-sm">Cart</p>
           </div>
         </div>
       </div>
 
       {/* Botton nav */}
-      <div className="flex item-center space-x-3 p-2 pl-6 bg-[#232F3E] text-white text-sm w-full">
-        <p className="flex item-center link">
+      <div className="flex items-center space-x-3 p-2 pl-6 bg-[#232F3E] text-white text-sm w-full">
+        <p className="flex items-center link">
           <Bars3Icon className="h-6 mr-1" /> All
         </p>
-        <p className="link">Prime Video</p>
-        <p className="link">Amazon business</p>
         <p className="link">Today's Deals</p>
-        <p className="link hidden lg:inline-flex">Electronics</p>
-        <p className="link hidden lg:inline-flex">Food & Grocery</p>
-        <p className="link hidden lg:inline-flex">Prime</p>
-        <p className="link hidden lg:inline-flex">Buy Again</p>
-        <p className="link hidden lg:inline-flex">Shopper Tooklkit</p>
-        <p className="link hidden lg:inline-flex">Health & Personal Care</p>
+        <p className="link hidden lg:inline-flex">Registry</p>
+        <p className="link hidden lg:inline-flex">Customer Service</p>
+        <p className="link hidden lg:inline-flex">Gift Cards</p>
+        <p className="link hidden lg:inline-flex">Sell</p>
+        <p className="link" onClick={signOut}>{session ? "Signout" : ""}</p>
       </div>
     </div>
   );

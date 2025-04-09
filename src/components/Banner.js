@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const ImageCarousel = () => {
   return (
-    <div className="relative md:mx-25 sm:mx-auto">
+    <div className="relative">
       <div className="absolute w-full h-10 bg-gradient-to-t from-gray-200 to-transparent bottom-0 z-20" />
 
       <Carousel
