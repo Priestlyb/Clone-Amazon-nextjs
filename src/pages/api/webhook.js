@@ -11,7 +11,8 @@ const app = !admin.apps.length
     : admin.app();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
+const endpointSecret = process.env.STRIPE_SIGNING_SECRET
+;
 
 const fullfillOrder = async (session) => {
     console.log(`Fulfilling order for session ${session.id}`);
