@@ -4,6 +4,9 @@ const nextConfig = {
         domains: ["links.papareact.com", "fakestoreapi.com", "pinterest.com", "i.pinimg.com"],
     },
     reactStrictMode: false,
+    env: {
+        stripe_public_key: process.env.STRIPE_PUBLIC_KEY
+    }
 };
 
 export default nextConfig;

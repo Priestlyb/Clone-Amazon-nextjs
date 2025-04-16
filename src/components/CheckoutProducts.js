@@ -41,7 +41,7 @@ const removeItemfromBasket = () => {
             ))}
         </div>
         <p className="text-sm my-2 line-clamp-3">{description}</p>
-        <p className="text-lg font-bold">₦ {price}</p>
+        <p className="text-lg font-bold">${price}</p>
         {hasPrime && (
             <div className="flex items-center my-5 text-xs text-gray-500">
                 <Image

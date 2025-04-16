@@ -46,7 +46,7 @@ function Header() {
         {/* Right nav */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
           <div
-            onClick={signIn}
+            onClick={!session ? signIn : () => router.push("/profile")}
             className="cursor-pointer link"
           >
             <p className="hover:underline">
@@ -55,7 +55,7 @@ function Header() {
             <p className="font-extrabold md:text-sm">Account & lists</p>
           </div>
 
-          <div className="link">
+          <div onClick={() => router.push("/orders")} className="link">
             <p>Returns</p>
             <p className="font-extrabold md:text-sm">& Orders</p>
           </div>
