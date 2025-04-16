@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["links.papareact.com", "fakestoreapi.com", "pinterest.com", "i.pinimg.com"],
+        domains: ["links.papareact.com", "fakestoreapi.com", "pinterest.com", "pngimg.com", "i.pinimg.com"],
     },
     reactStrictMode: false,
     env: {

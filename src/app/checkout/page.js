@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useSession } from 'next-auth/react';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY); // Updated env var
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY); // Updated env var
 
 function Checkout() {
   const { data: session } = useSession();
