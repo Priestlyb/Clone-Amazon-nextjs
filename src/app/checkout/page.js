@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useSession } from 'next-auth/react';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY); // Updated env var
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 function Checkout() {
   const { data: session } = useSession();
@@ -56,24 +56,27 @@ function Checkout() {
   return (
     <div className='bg-gray-100'>
       <Header />
+
       <main className='max-w-screen p-5 lg:flex'>
-        {/* Left */}
+        {/* Left side */}
         <div className='flex-grow m-5 shadow-sm'>
           <Image
             alt='Checkout Image'
-            src={"https://links.papareact.com/ikj"}
+            src="https://links.papareact.com/ikj"
             width={500}
             height={100}
             className='w-full object-contain'
           />
+
           <div className='flex flex-col p-5 space-y-10 bg-white'>
             <h1 className='text-3xl border-b pb-4'>
               {items.length === 0 ? "Your cart is empty" : "Your Dream Cart"}
             </h1>
 
             {items.map((item, i) => (
-              <CheckoutProducts 
+              <CheckoutProducts
                 key={i}
+                index={i} // ✅ Pass the index
                 id={item.id}
                 title={item.title}
                 price={item.price}
@@ -87,7 +90,7 @@ function Checkout() {
           </div>
         </div>
 
-        {/* Right */}
+        {/* Right side */}
         <div className='flex flex-col bg-white p-10 shadow-md'>
           {items.length > 0 && (
             <>
